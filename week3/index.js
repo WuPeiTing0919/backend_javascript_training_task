@@ -56,7 +56,9 @@ calculateTotalPrice(purchaseRecords);
 
 // 第三階段：篩選出還沒有購課的會員
 function filterNoPurchaseMember(myArray,dataArray){
-    let noCoursesArray = dataArray.filter(item => !myArray.some(obj => obj.name === item));
+    let noCoursesArray = dataArray.filter(item => 
+        myArray.map(e => e.name).indexOf(item) === -1
+    );
 
     console.log(`未購買課程的會員有：${noCoursesArray}`);
 }
