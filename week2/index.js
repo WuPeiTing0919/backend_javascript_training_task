@@ -86,7 +86,7 @@ let giftPriceRule = 1599; /* 贈品消費門檻 */
 let BobPrice = 1800; /* Bob 消費金額 */
 let BobIsVip = false; /* Bob 是否為 VIP */
 
-if (BobIsVip == true && BobPrice >= giftPriceRule){
+if (BobIsVip || BobPrice >= giftPriceRule){
   console.log("客戶您好，您有符合贈品資格");
   giftNum--;
 }else {
@@ -108,12 +108,12 @@ let coachIncome = 240000; // 小明全年業績
 let baseBonus = 6000; // 基本獎金
 let coachBonus = baseBonus; // 教練業績獎金帳單，並已加入條件一基本獎金
 
-if (coachIncome < 100000){
-  coachBonus += coachIncome * 0.1;
-}else if (coachIncome >= 100000 && coachIncome < 300000){
-  coachBonus += coachIncome * 0.15;
-}else if(coachIncome >= 300000){
+if(coachIncome > 300000){
   coachBonus += coachIncome * 0.2;
+}else if (coachIncome > 100000){
+  coachBonus += coachIncome * 0.15;
+}else{
+  coachBonus += coachIncome * 0.1;
 }
 
 console.log(`小明總共需支付 $${coachBonus} 獎金`);
@@ -128,26 +128,12 @@ let playerB = '剪刀';
 
 if(playerA === playerB){
   console.log('playerA 與 playerB 平手');
+}else if ((playerA === "石頭" && playerB === "剪刀") ||
+          (playerA === "剪刀" && playerB === "布") ||
+          (playerA === "布" && playerB === "石頭")) {
+  console.log("playerA 獲勝");
 }else{
-  if (playerA === '剪刀'){
-    if (playerB === '布'){
-      console.log('playerA 贏了，playerB 輸了');
-    }else if(playerB === '石頭'){
-      console.log('playerA 輸了，playerB 贏了');
-    }
-  }else if (playerA === '石頭'){
-    if (playerB === '剪刀'){
-      console.log('playerA 贏了，playerB 輸了');
-    }else if(playerB === '布'){
-      console.log('playerA 輸了，playerB 贏了');
-    }
-  }else if (playerA === '布'){
-    if (playerB === '石頭'){
-      console.log('playerA 贏了，playerB 輸了');
-    }else if(playerB === '剪刀'){
-      console.log('playerA 輸了，playerB 贏了');
-    }
-  }
+  console.log("playerB 獲勝");
 }
 
 
