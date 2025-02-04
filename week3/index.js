@@ -6,6 +6,12 @@ function addPurchaseRecord(name,courses){
     let price = 0;
     let total = 0;
 
+    // 姓名和課程堂數防呆
+    if(name == "" || courses == "" || typeof courses != "number"){
+        console.log("輸入錯誤，請輸入有效的會員名稱和課程數量");
+        return;
+    }
+
     // 計算課堂數量所對應的課堂單價
     switch (true){
         case courses >= 1 && courses <= 10 :
@@ -20,19 +26,17 @@ function addPurchaseRecord(name,courses){
             price = 1100;
             break;
         
-        default :
-            console.log("輸入錯誤，請輸入有效的會員名稱和課程數量");
-            return;
+
     }
 
     total = courses * price;
     
     console.log(`新增購買記錄成功！會員 ${name} 購買 ${courses} 堂課，總金額為 ${total} 元。`);
     purchaseRecords.push({
-            name : name,
-            courses : courses,
-            price : price,
-            total : total
+            name,
+            courses,
+            price,
+            total
         });
 }
 
@@ -43,8 +47,8 @@ addPurchaseRecord("Hannah", 50);
 addPurchaseRecord("名稱", "課程數量");
 
 // 第二階段：計算目前的總營業額
-let totalPrice = 0
 function calculateTotalPrice(myArray){
+    let totalPrice = 0;
     myArray.forEach(item => {
         totalPrice += item.total;
     });
@@ -55,9 +59,9 @@ function calculateTotalPrice(myArray){
 calculateTotalPrice(purchaseRecords);
 
 // 第三階段：篩選出還沒有購課的會員
-function filterNoPurchaseMember(myArray,dataArray){
-    let noCoursesArray = dataArray.filter(item => 
-        myArray.map(e => e.name).indexOf(item) === -1
+function filterNoPurchaseMember(mainArray,referArray){
+    let noCoursesArray = referArray.filter(item => 
+        mainArray.map(e => e.name).indexOf(item) === -1
     );
 
     console.log(`未購買課程的會員有：${noCoursesArray}`);
