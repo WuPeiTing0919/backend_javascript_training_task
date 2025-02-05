@@ -7,7 +7,7 @@ function addPurchaseRecord(name,courses){
     let total = 0;
 
     // 姓名和課程堂數防呆
-    if(name == "" || courses == "" || typeof courses != "number"){
+    if(name == "" || typeof courses != "number"){
         console.log("輸入錯誤，請輸入有效的會員名稱和課程數量");
         return;
     }
@@ -25,8 +25,10 @@ function addPurchaseRecord(name,courses){
         case courses >= 21 :
             price = 1100;
             break;
-        
 
+        default :
+            console.log("輸入錯誤，請輸入有效的會員名稱和課程數量");
+            return;
     }
 
     total = courses * price;
